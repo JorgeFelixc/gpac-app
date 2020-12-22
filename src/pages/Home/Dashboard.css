@@ -1,0 +1,40 @@
+.wrapper-dashboard{
+    padding:2vh 2vw;
+}
+.wrapper-dashboard > h1{
+    margin:20px 0px;
+    font-size: 30px;
+}
+
+.box-graph{ 
+    margin:20px;
+    background-color:white;
+    padding:30px 50px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.box-pad-graph{
+    width: 90%;
+    margin:auto;
+}
+
+.text-title-graph{
+    font-size: 35px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.wrapper-ndash{
+    padding:25px 60px;
+}
+
+.wrapper-expandible-entradas .row-between > div{
+    padding:2px 6px;
+    flex:1;
+    /* text-align: center; */
+}
+.wrapper-main{
+    display: flex;
+    min-height: 100vh;
+}

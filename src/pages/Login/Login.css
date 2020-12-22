@@ -1,0 +1,37 @@
+.wrapper-login{
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--theme-bg);
+}
+
+.box-login{
+    margin:25px 0px;
+    width: 20vw;
+    font-size: 14px;
+    color:rgb(202, 198, 198);
+}
+
+.box-login > .MuiFormControl-root{
+    margin:15px 0px;
+    width: 100%;
+}
+.box-login .MuiCheckbox-root{
+    color:white ;
+}
+
+.box-login .MuiCheckbox-colorSecondary.Mui-checked{
+    color:var(--primary-bg);
+}
+.box-login .MuiInputBase-input,
+.box-login .MuiInputLabel-outlined {
+    color:white !important;
+}
+
+.box-login .MuiOutlinedInput-notchedOutline{
+    border-color: white !important;
+}
+
+.icon-logo{
+    height: 122px;
+    width: 110px;
+}

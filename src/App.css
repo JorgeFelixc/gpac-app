@@ -1,0 +1,148 @@
+:root{ 
+  --primary-bg:#4056F4;
+  --primary-color:white;
+
+  --secondary-bg: #FF3939;
+  --secondary-color: white;
+
+  --theme-bg: #24292E;
+  --theme-color:white;
+}
+
+.wrapper {
+  margin: 2.5em 4em;
+}
+body{
+  color:var(--theme-color);
+  background-color: var(--theme-bg);
+}
+
+.text-error{ 
+  color:crimson;
+  margin:3px 0px;
+  border-left: 2px solid crimson;
+  padding: 10px 15px;
+  background-color:rgba(220, 20, 60, 0.11);
+  transition: 0.2s all;
+}
+.row{
+  display: flex;
+  align-items: center;
+}
+
+.columns-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.row-between{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.row-childrens > div{
+  flex:1;
+  padding:10px 2px;
+  margin:0px 10px;
+  /* background-color: white; */
+  /* padding:0px 25px; */
+}
+
+.row-childrens{
+  border-left:3px solid var(--tercer-color);
+  margin:10px 0px;
+  padding:5px;
+}
+
+.row-childrens p{
+  margin:0;
+}
+
+.row-childrens:hover{
+  color:black;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.grid-3x3{
+  margin:15px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.grid-4x{
+  margin:15px 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 25px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid rgb(20, 94, 231);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(20, 94, 231) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.MuiButton-contained{
+  background-color: var(--primary-bg) !important;
+  color:var(--primary-color) !important;
+  text-transform: capitalize !important;
+  width: 100%;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.line-100{
+  height: 1px;
+  margin:15px 0px;
+  width: 100%;
+  background-color: rgba(0,0,0, 0.3);
+}
+
+a{
+  text-decoration: none;
+  color:var(--primary-bg);
+}
+
+.wrapper-loader{
+  height: 100%;
+  width: 100%;
+}
+
+#root{
+  height: 100vh;
+}
