@@ -8,6 +8,7 @@ import {
   AccessAlarm,
 
 } from '@material-ui/icons'
+import Market from '../../pages/Market/Market';
 
 export interface ISideMenuData {
     key: string;
@@ -22,17 +23,17 @@ export interface ISideMenuData {
 
 export const SideMenuData:Array<ISideMenuData> =[ 
   {
-    key:'/market',
-    link:'/market',
+    key:'/dashboard',
+    link:'/dashboard',
     icon: <DashboardOutlined/>,
-    title:'Market',
+    title:'Dashboard',
     users: ["authenticated"],
   },
   {
-    key:'/fashero',
-    link:'/fashero',
+    key:'/job_orders',
+    link:'/job_orders',
     icon: <AccessAlarm/>,
-    title:'Market',
+    title:'Job Orders',
     users: ["authenticated"],
   },
   {
@@ -41,26 +42,41 @@ export const SideMenuData:Array<ISideMenuData> =[
     icon: <DashboardOutlined/>,
     title:'Market',
     users: ["authenticated"],
+    component: Market
   },
   {
-    key:'/market',
-    link:'/market',
+    key:'/companies',
+    link:'/companies',
     icon: <DashboardOutlined/>,
-    title:'Market',
+    title:'Companies',
     users: ["authenticated"],
   },
   {
-    key:'/market',
-    link:'/market',
+    key:'/s_projects',
+    link:'/s_projects',
     icon: <DashboardOutlined/>,
-    title:'Market',
+    title:'S. Projects',
     users: ["authenticated"],
   },
   {
-    key:'/market',
-    link:'/market',
+    key:'/map',
+    link:'/map',
     icon: <DashboardOutlined/>,
-    title:'Market',
+    title:'Map',
+    users: ["authenticated"],
+  },
+  {
+    key:'/tasks_tool',
+    link:'/tasks_tool',
+    icon: <DashboardOutlined/>,
+    title:'Tasks Tool',
+    users: ["authenticated"],
+  },
+  {
+    key:'/sendouts',
+    link:'/sendouts',
+    icon: <DashboardOutlined/>,
+    title:'Sendouts',
     users: ["authenticated"],
   },
 ]

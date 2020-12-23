@@ -8,7 +8,9 @@
   --theme-bg: #24292E;
   --theme-color:white;
 }
-
+*{
+  box-sizing:border-box;
+}
 .wrapper {
   margin: 2.5em 4em;
 }
@@ -145,4 +147,7 @@ a{
 
 #root{
   height: 100vh;
+}
+.left-auto{
+  margin-left: auto;
 }

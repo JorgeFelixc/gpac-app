@@ -16,7 +16,8 @@ import './utils/responsive.css';
 import Dashboard from './pages/Home/Dashboard';
 
 function App() {
-  const [isLogged, setIsLogged] = useState<boolean>(localStorage.getItem('token') !== null);
+  // const [isLogged, setIsLogged] = useState<boolean>(localStorage.getItem('token') !== null);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
   const [user, setUser] = useState<any>(undefined)
 
   useEffect(() => {

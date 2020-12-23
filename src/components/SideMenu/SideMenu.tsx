@@ -10,6 +10,8 @@ import { useStateUser } from '../Hooks/useGlobalHook';
 import { ReactComponent as LogoSvg} from '../../assets/img/logo.svg';
 
 import './SideMenu.css';
+import moment from 'moment';
+import useTime from '../Hooks/useTime';
 
 
 const SideMenu = withRouter(({ location }) => {
@@ -17,6 +19,7 @@ const SideMenu = withRouter(({ location }) => {
   const [userData, setUserData] = useState<any>();
 
   const size = useWindowSize();
+  const time = useTime({cycle: 100, format:'HH:mm:ss'});
   const { state, dispatch} = useStateUser();
 
   useEffect(() => {
@@ -58,7 +61,7 @@ const SideMenu = withRouter(({ location }) => {
         return BuildMenu(subItem);
       })
 
-      return <MenuItem icon={item.icon} title={item.title} key={item.key}>
+      return <MenuItem id={item.key} pathname={[location.pathname]}>
         {subItems.map(i => i)}
       </MenuItem>
     }
@@ -66,22 +69,30 @@ const SideMenu = withRouter(({ location }) => {
 
 
 
-    return <MenuItem icon={item.icon} title={item.title} key={item.key} >
-      <Link to={item.link}>{item.title}</Link>
+    return <MenuItem id={item.key} pathname={[location.pathname]}>
+      <Link to={item.link}>
+        {item.icon}
+        <p>{item.title}</p>
+      </Link>
     </MenuItem>
 
   }
 
 
-  // selectedKeys={[location.pathname]} 
   return (
     <aside className="wrapper-aside">
-      <Menu selectedKeys={[location.pathname]}  >
+      <menu className="wrapper-menu" >
         <LogoSvg  className="logo-aside"/>
         {
           GenerateMenu()
         }
-      </Menu>
+
+        <div className="box-hour">
+          <p>{moment().format('ddd MMM Do')}</p>
+          <p className="text-time">{time}</p>
+          <p>Actual time</p>
+        </div>
+      </menu>
     </aside>
 
   )
@@ -90,36 +101,16 @@ const SideMenu = withRouter(({ location }) => {
 export default SideMenu;
 
 
-interface IMenu{
-  selectedKey:string[],
-}
-const Menu = (props:any) =>  { 
-  useEffect(() => {
-    console.log("props:", props.selectedKeys);
-    // console.log(props.children[1][0])
-    React.Children.map(props.children, (child,index) => { 
-      console.log(child);
-      if(props.selectedKeys.indexOf(child.key) !== -1){
-        React.cloneElement(child, {actived:true});
-        // child.props['actived'] = true;
-      }
-    })
-  }, [])
-  
-  return (
-    <div className="wrapper-menu">
-      {props.children}
-    </div>
-  )
+interface IMenuItem {
+    id: string,
+    pathname: string[],
+    children: React.ReactNode
 }
 
-const MenuItem = (props:any) => { 
-  const DomMenu = useRef(null);
-  // console.log("props menuitem:", props);
+const MenuItem = ({id,pathname,children}:IMenuItem) => { 
   return(
-    <div key={props.key} ref={DomMenu}  className={props.actived ? "box-aside-item actived" : "box-aside-item"}>
-      {props.icon}
-      <p>{props.title}</p>
+    <div className={pathname.indexOf(id) !== -1 ? "box-aside-item aside-item-actived" : "box-aside-item"}>
+      {children}
     </div>
   )
 }

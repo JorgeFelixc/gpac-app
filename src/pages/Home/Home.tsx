@@ -9,6 +9,7 @@ import Dashboard from './Dashboard';
 import { useStateUser } from '../../components/Hooks/useGlobalHook';
 
 import Loader from '../../components/Loader';
+import Nav from '../../components/Nav/Nav';
 
 interface HomeProps {
   isLogged: boolean;
@@ -59,9 +60,11 @@ export default function Home({ isLogged, handleLogout }: HomeProps) {
   return (
     <div className="wrapper-main">
       <SideMenu />
-      <section>
+      <section style={{flex:1}}>
+        <Nav />
+
         <Switch>
-            <Redirect exact from='/' to='/dashboard' />
+            <Redirect exact from='/' to='/market' />
             {
               // Renderizando todos los Protected Routes.
               GetProtectedRoutes(SideMenuData)

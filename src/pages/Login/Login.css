@@ -35,3 +35,19 @@
     height: 122px;
     width: 110px;
 }
+
+
+.box-login input:-webkit-autofill,
+.box-login input:-webkit-autofill:hover, 
+.box-login input:-webkit-autofill:focus,
+.box-login textarea:-webkit-autofill,
+.box-login textarea:-webkit-autofill:hover,
+.box-login textarea:-webkit-autofill:focus,
+.box-login select:-webkit-autofill,
+.box-login select:-webkit-autofill:hover,
+.box-login select:-webkit-autofill:focus {
+    /* border: 1px solid green; */
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
