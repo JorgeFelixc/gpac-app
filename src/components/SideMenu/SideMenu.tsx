@@ -23,7 +23,7 @@ const SideMenu = withRouter(({ location }) => {
   const { state, dispatch} = useStateUser();
 
   useEffect(() => {
-    GetUserData();
+    // GetUserData();
   }, [])
 
   useEffect(() =>  {
@@ -32,7 +32,7 @@ const SideMenu = withRouter(({ location }) => {
   }, [userData]);
   
   async function GetUserData(){ 
-    const user_service = await api('users/me').get();
+    const user_service = await api('user/me').get();
     if(user_service){
       // console.log(user_service);
       setUserData(user_service);
@@ -69,7 +69,7 @@ const SideMenu = withRouter(({ location }) => {
 
 
 
-    return <MenuItem id={item.key} pathname={[location.pathname]}>
+    return <MenuItem id={item.key} pathname={[location.pathname]} key={item.key}>
       <Link to={item.link}>
         {item.icon}
         <p>{item.title}</p>

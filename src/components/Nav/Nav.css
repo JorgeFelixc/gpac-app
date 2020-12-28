@@ -20,6 +20,7 @@ nav{
 .box-filters .MuiInputBase-root{
     color:white !important;
     border:none !important;
+    width: 160px;
 }
 
 .box-filters .MuiOutlinedInput-notchedOutline{

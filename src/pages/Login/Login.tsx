@@ -8,6 +8,7 @@ import {ReactComponent as LogoSvg} from '../../assets/img/logo.svg';
 import {TextField, Button, Checkbox} from '@material-ui/core';
 
 import './Login.css';
+import { GetFormValues } from '../../utils/util';
 
 interface LoginProps {
   isLogged: boolean;
@@ -22,7 +23,7 @@ export default function Login({isLogged, handleLogin}: LoginProps) {
   const onFinish = async (values: any) => {
     try {
       setLoading(true);
-      const data = await api('auth/local').post(values);
+      const data = await api('user/auth').post(values);
       console.log(data);
       if (data.jwt) {
         localStorage.setItem('token', `Bearer ${data.jwt}`);
@@ -39,6 +40,12 @@ export default function Login({isLogged, handleLogin}: LoginProps) {
     }
   };
 
+  const onLogin = (params:any) => {
+    console.log("Form params:", params);
+
+  }
+
+
   if (isLogged) {
     return (<Redirect to='/' />)
   }
@@ -46,18 +53,18 @@ export default function Login({isLogged, handleLogin}: LoginProps) {
   return (
       <div className="wrapper-login columns-center">
         <LogoSvg className="icon-logo"/>
-        <form className="box-login columns-center">
-          <TextField variant="outlined" label="username" ></TextField>
-          <TextField variant="outlined" label="password" type="password" ></TextField>
+        <form className="box-login columns-center" autoComplete="off" noValidate >
+          <TextField variant="outlined" label="Email" name="login" id="email" type="email" ></TextField>
+          <TextField variant="outlined" label="Password" name="login" id="password" type="password" ></TextField>
           <div className="row-between">
             <a href="#">Forgot your password?</a>
             <div className="row">
-              <p>Remember me?</p>
+              <p>Remember me</p>
               <Checkbox name="forgot" title="remember me?" />
             </div>
           </div>
           <div className="line-100"></div>
-          <Button variant="contained" >Login</Button>
+          <Button variant="contained" onClick={() => GetFormValues('login', onFinish)}>Login</Button>
         </form>
       </div>
   )

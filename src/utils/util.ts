@@ -10,13 +10,17 @@ export async function GetData(uri:string, callback:React.Dispatch<any> ,setLoade
         if(setLoader){
             setLoader(true); 
         }
+        console.log("mandar a:", uri);
         let data = await api(uri).get();
         console.log(`Trajo ${uri} on GetData: `, data);
 
-        const {statusCode} = data;
-        if(statusCode && statusCode !== 200){
+        const {statusCode, error} = data;
+        if(error){
+            // if(error === "youre not logged"){
+            //     window.location.href ="/";
+            // }
             return;
-        } 
+        }
 
         if(isArray(data)){
             data = data.map((item:any,index:number) => { 
@@ -103,3 +107,24 @@ export const FLT_EntradasDate = (res:any, dateParam: any) => {
     return false;
 }
 
+
+
+export const GetFormValues = (formName:string, callback: Function) => {
+    const formValues = document.getElementsByName(formName);
+    let formData:any = {};
+    formValues.forEach((item:any) => { 
+        switch (item.nodeName) {
+            case 'SELECT':
+                
+                break;
+        
+            default:
+                if(!item.id) break;
+                formData[item.id] = item.value;
+                break;
+        }
+        // console.log("item:", item.nodeName);
+    });
+    callback(formData);
+
+}

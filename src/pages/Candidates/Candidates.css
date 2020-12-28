@@ -1,0 +1,54 @@
+.box-profile{
+    display: flex;
+    flex-direction: column;
+    padding:25px;
+}
+.box-profile > button{
+    margin:15px 0px;
+}
+.img-profile{
+    height: 179px;
+    width: 179px;
+    margin-bottom: 25px;
+    object-fit: cover;
+}
+
+
+.box-information{
+    flex:1;
+}
+.wrapper-candidate-info{
+    width: 100%;
+    padding:30px 40px;
+    min-height: 10vh;
+    border-radius: 0px 5px 5px 5px;
+    background-color: #34343C;
+}
+
+.box-information  .MuiTab-root{
+    background-color:var(--primary-bg);
+    opacity: 1;
+    /* border-radius: 5px 0px 5px 0px; */
+}
+
+.box-information  .MuiTab-root:first-child{
+    border-radius: 5px 0px 0px 0px;
+}
+.box-information  .MuiTab-root:last-child{
+    border-radius: 0px 5px 0px 0px;
+}
+
+.box-information .MuiTab-textColorInherit.Mui-selected{
+    background-color:  #34343C;
+}
+
+
+.box-information .PrivateTabIndicator-colorSecondary-7{
+    background-color:#34343C;
+}
+
+.box-information .MuiInputBase-input{
+    background-color:#20232B;
+    border-color: #20232B;
+    color:white;
+}

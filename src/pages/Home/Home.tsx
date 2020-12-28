@@ -10,6 +10,7 @@ import { useStateUser } from '../../components/Hooks/useGlobalHook';
 
 import Loader from '../../components/Loader';
 import Nav from '../../components/Nav/Nav';
+import Candidates from '../Candidates/Candidates';
 
 interface HomeProps {
   isLogged: boolean;
@@ -65,37 +66,28 @@ export default function Home({ isLogged, handleLogout }: HomeProps) {
 
         <Switch>
             <Redirect exact from='/' to='/market' />
-            {
-              // Renderizando todos los Protected Routes.
-              GetProtectedRoutes(SideMenuData)
+            
+            { GetProtectedRoutes(SideMenuData) // Renderizando todos los Protected Routes de SideMenuData.  
             }
+
+            <ProtectedRoute isAuthenticated={isLogged} authenticationPath='/login' path="/candidates/:id" component={Candidates} />
             <Route path='/dashboard'>
                <Dashboard />  
             </Route>
 
           </Switch>
       </section>
+      <footer className="row">
+          <p>GPAC Directory v0.1 - 2019</p>
+          <ul className="left-auto list-footer">
+            <li>Help</li>
+            <li>Turotials</li>
+            <li>Support</li>
+            <li>FAQ's</li>
+          </ul>
+      </footer>
     </div>
 
 
   )
 }
-{/* <Layout className="site-layout" >
-<Header className="site-layout-background" >
-  <MenuUnfoldOutlined className="icon-open-nav" onClick={handleOpenMenu} style={{fontSize:'25px'}} />
-  <Row justify='end' style={{marginLeft:'auto'}}>
-    <Col style={{  paddingRight: 24 }}>
-      <Dropdown overlay={userMenu} trigger={['click']}>
-        <a onClick={e => e.preventDefault()}>
-          <Avatar style={{ backgroundColor: '#00a2ae', marginRight: 15 }}>{user.name.charAt(0)}</Avatar>{user.name} {user.lastname} <DownOutlined />
-        </a>
-      </Dropdown>
-
-    </Col>
-  </Row>
-</Header>
-<Content style={{ margin: '0 16px' }}>
-
-</Content>
-<Footer style={{ textAlign: 'center' }}>Departamento de Desarrollo Tecnológico y Sistemas </Footer>
-</Layout> */}

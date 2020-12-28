@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 
 import Login from './pages/Login/Login';
@@ -16,8 +17,8 @@ import './utils/responsive.css';
 import Dashboard from './pages/Home/Dashboard';
 
 function App() {
-  // const [isLogged, setIsLogged] = useState<boolean>(localStorage.getItem('token') !== null);
-  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [isLogged, setIsLogged] = useState<boolean>(localStorage.getItem('token') !== null);
+  // const [isLogged, setIsLogged] = useState<boolean>(true);
   const [user, setUser] = useState<any>(undefined)
 
   useEffect(() => {
@@ -41,21 +42,30 @@ function App() {
 
 
   const AuthVerification = async () =>{ 
-    const existToken = localStorage.getItem('token');
-    if(!existToken){
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      return false;
+    try{
+      const existToken = localStorage.getItem('token');
+      if(!existToken){
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        return false;
+      }
+  
+      const auth_service = await api('user/me').get();
+  
+      const { statusCode, error } = auth_service;
+      if(statusCode && statusCode === 401 || statusCode && statusCode === 403 || error){
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsLogged(false);
+        window.location.href ="/";
+  
+      }
     }
-
-    const auth_service = await api('users/me').get();
-
-    const { statusCode } = auth_service;
-    if(statusCode && statusCode === 401){
+    catch(ex){ 
+      console.log("error al auth");
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       setIsLogged(false);
-
     }
 
   }
