@@ -53,7 +53,6 @@ function MarketTable(props:any){
     const ignoredHeaders = [ 
         "id",
         "password",
-        "email",
         "firstName",
         "lastName",
         "image",
