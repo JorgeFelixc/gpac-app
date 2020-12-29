@@ -59,24 +59,27 @@ export default function Home({ isLogged, handleLogout }: HomeProps) {
   }
 
   return (
-    <div className="wrapper-main">
-      <SideMenu />
-      <section style={{flex:1}}>
-        <Nav />
+    <div>
+      <div className="wrapper-main">
+        <SideMenu />
+        <section style={{flex:1}}>
+          <Nav />
 
-        <Switch>
-            <Redirect exact from='/' to='/market' />
-            
-            { GetProtectedRoutes(SideMenuData) // Renderizando todos los Protected Routes de SideMenuData.  
-            }
+          <Switch>
+              <Redirect exact from='/' to='/market' />
+              
+              { GetProtectedRoutes(SideMenuData) // Renderizando todos los Protected Routes de SideMenuData.  
+              }
 
-            <ProtectedRoute isAuthenticated={isLogged} authenticationPath='/login' path="/candidates/:id" component={Candidates} />
-            <Route path='/dashboard'>
-               <Dashboard />  
-            </Route>
+              <ProtectedRoute isAuthenticated={isLogged} authenticationPath='/login' path="/candidates/:id" component={Candidates} />
+              <Route path='/dashboard'>
+                <Dashboard />  
+              </Route>
 
-          </Switch>
-      </section>
+            </Switch>
+        </section>
+
+      </div>
       <footer className="row">
           <p>GPAC Directory v0.1 - 2019</p>
           <ul className="left-auto list-footer">

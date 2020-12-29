@@ -3,6 +3,7 @@ import React from 'react';
 import Dashboard from '../../pages/Home/Dashboard';
 import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
+import Map from '../../pages/Map/Map';
 import {
   DashboardOutlined,
   AccessAlarm,
@@ -63,6 +64,7 @@ export const SideMenuData:Array<ISideMenuData> =[
     link:'/map',
     icon: <DashboardOutlined/>,
     title:'Map',
+    component: Map,
     users: ["authenticated"],
   },
   {

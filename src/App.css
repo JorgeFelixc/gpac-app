@@ -191,10 +191,11 @@ a{
 }
 
 footer{
-  position: fixed;
+  /* box-sizing: content-box; */
+  /* position: fixed; */
   bottom: 0;
   background-color: #1A1C21;
-  width: 100vw;
+  /* width: 100vw; */
   color:#CECECE;
   padding:0px 15px;
 }
