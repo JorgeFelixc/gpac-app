@@ -57,7 +57,7 @@ function App() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setIsLogged(false);
-        window.location.href ="/";
+        window.location.href ="/gpac-app";
   
       }
     }
