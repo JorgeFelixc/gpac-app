@@ -2,7 +2,7 @@
   "name": "gpac-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "http://35.238.225.98/gpac-app",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
