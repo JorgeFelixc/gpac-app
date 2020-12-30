@@ -78,7 +78,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename={'/gpac-app'}>
       <Switch>
         <Route exact path='/fashero'>
           <Home isLogged={isLogged} handleLogout={handleLogout} />
