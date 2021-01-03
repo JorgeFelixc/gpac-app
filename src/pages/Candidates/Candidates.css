@@ -17,11 +17,25 @@
 .box-information{
     flex:1;
 }
+
+
+
 .wrapper-candidate-info{
+
+}
+
+.box-candidate-info:first-child{
+    border-radius: 0px 5px 5px 5px;
+}
+
+
+.box-candidate-info{
+    margin:0;
     width: 100%;
     padding:30px 40px;
+    margin-bottom: 30px;
+    border-radius: 5px;
     min-height: 10vh;
-    border-radius: 0px 5px 5px 5px;
     background-color: #34343C;
 }
 
@@ -42,7 +56,8 @@
     background-color:  #34343C;
 }
 
-
+.box-information .PrivateTabIndicator-colorSecondary-9,
+.box-information .PrivateTabIndicator-colorSecondary-11,
 .box-information .PrivateTabIndicator-colorSecondary-7{
     background-color:#34343C;
 }
@@ -51,4 +66,39 @@
     background-color:#20232B;
     border-color: #20232B;
     color:white;
+}
+.no-view{
+    opacity: 0;
+    left:-200vw;
+    position: absolute;
+}
+
+.box-attachment button{
+    margin-left: 15px;
+}
+
+.box-attachment > h4{
+    margin:0px;
+}
+.box-attachment{
+    margin:25px 0px;
+}
+.box-candidate-info{
+    grid-gap: 30px;
+}
+.box-candidate-info .MuiFormControl-root,
+.box-candidate-info .MuiOutlinedInput-root{
+    width: 100% ;
+}
+.box-candidate-info .MuiSelect-icon{
+    top: calc(62% - 12px);
+}
+.wrong-value{
+    border-left:3px solid crimson  !important;
+    z-index: 50;
+    /* font-weight: bolder !important; */
+}
+
+.wrong-value:focus{
+    outline:none !important;
 }

@@ -111,20 +111,39 @@ export const FLT_EntradasDate = (res:any, dateParam: any) => {
 
 export const GetFormValues = (formName:string, callback: Function) => {
     const formValues = document.getElementsByName(formName);
+    let allCorrect = true;
     let formData:any = {};
     formValues.forEach((item:any) => { 
         switch (item.nodeName) {
             case 'SELECT':
-                
+                console.log("IM A SELECT IM NERVIUS");
                 break;
         
             default:
                 if(!item.id) break;
+                if(!item.required){
+                    formData[item.id] = item.value;
+                    break;
+                }
+
+                if(item.required && item.value === ""){
+                    allCorrect = false;
+                    item.classList.add('wrong-value');
+                    break;
+                }
+                item.classList.remove('wrong-value');
                 formData[item.id] = item.value;
                 break;
         }
         // console.log("item:", item.nodeName);
     });
-    callback(formData);
+    if(allCorrect){
+        callback(formData);
+        return;
+    }
+
+    console.error('Wrong values in your form');
+
+
 
 }

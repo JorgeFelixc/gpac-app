@@ -1,4 +1,4 @@
-import IGlobalState from "../../../interfaces/Helpers/IGlobalState";
+import IGlobalState from "./IGlobalState";
 
 export interface IGlobalActions{
     type: string,
@@ -20,15 +20,10 @@ const GlobalActions = (state: IGlobalState, action:IGlobalActions): IGlobalState
             return{
                 ...state,
             }
-        case 'active_menu':
+        case 'set_user':
             return{
                 ...state,
-                isMenuOpen: true,
-            }
-        case 'desactive_menu':
-            return{
-                ...state,
-                isMenuOpen: false,
+                user: action.action,
             }
         default:
             return state;

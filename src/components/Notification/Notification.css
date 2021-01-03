@@ -1,0 +1,15 @@
+.box-notification{
+    padding:0px 25px;
+    border-radius: 5px;
+    background-color: #20232B;
+}
+.ntf-success{
+    background-color:rgb(105, 216, 77);
+}
+.ntf-warning{
+    background-color: rgb(207, 165, 47);
+
+}
+.ntf-error{
+    background-color: crimson;
+}

@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext } from 'react';
-import IGlobalState from '../../interfaces/Helpers/IGlobalState';
+import IGlobalState from './GlobalVariables/IGlobalState';
 import GlobalActions, { IGlobalActions } from './GlobalVariables/GlobalActions';
 import GlobalState from './GlobalVariables/GlobalState';
 

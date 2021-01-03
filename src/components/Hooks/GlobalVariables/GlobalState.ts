@@ -1,4 +1,4 @@
-import IGlobalState from "../../../interfaces/Helpers/IGlobalState";
+import IGlobalState from "./IGlobalState";
 
 const GlobalState: IGlobalState = {
     notifications: [],

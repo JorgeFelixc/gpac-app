@@ -63,7 +63,7 @@ export default function Home({ isLogged, handleLogout }: HomeProps) {
       <div className="wrapper-main">
         <SideMenu />
         <section style={{flex:1}}>
-          <Nav />
+          <Nav handleLogout={handleLogout}/>
 
           <Switch>
               <Redirect exact from='/' to='/market' />

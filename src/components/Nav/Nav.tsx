@@ -6,8 +6,14 @@ import { ReactComponent as AdnvancedMenuIcon } from '../../assets/img/menu.svg'
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './Nav.css';
+import { useStateUser } from '../Hooks/useGlobalHook';
 
-export default function Nav(props:any){
+interface INav {
+    handleLogout():void, 
+}
+
+export default function Nav(props:INav){
+    const { state, dispatch } = useStateUser();
     return(
         <nav>
             <div className="row box-filters">
@@ -33,9 +39,16 @@ export default function Nav(props:any){
             </Button>
 
             <p className="text-advanced-seach left-auto">Advanced Search</p>
-            <Button className="circle">
+            <Button className="circle btn-menu" tabIndex={5}>
                 <MoreVertIcon className="icon-menu"/>
-                
+                <div className="wrapper-dropdown-menu columns">
+                    <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/anime_spirited_away_no_face_nobody-512.png"  />
+                    <h3>{state.user?.firstName} {state.user?.lastName} ({state.user?.role.description})</h3>
+                    <p className="text-email">{state.user?.email}</p>
+                    <div className="top-auto">
+                        <Button variant="contained" className="btn-border" onClick={props.handleLogout}>Logout</Button>
+                    </div>
+                </div>
             </Button>
 
         </nav>

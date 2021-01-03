@@ -63,7 +63,12 @@ export default function Login({isLogged, handleLogin}: LoginProps) {
               <Checkbox name="forgot" title="remember me?" />
             </div>
           </div>
-          <div className="line-100"></div>
+
+          { 
+            error &&
+            <div className="box-error">Error wrong credentials</div>
+          }
+          {/* <div className="line-100"></div> */}
           <Button variant="contained" onClick={() => GetFormValues('login', onFinish)}>Login</Button>
         </form>
       </div>

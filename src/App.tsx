@@ -15,11 +15,14 @@ import api from './utils/api';
 
 import './utils/responsive.css';
 import Dashboard from './pages/Home/Dashboard';
+import { useStateUser } from './components/Hooks/useGlobalHook';
 
 function App() {
   const [isLogged, setIsLogged] = useState<boolean>(localStorage.getItem('token') !== null);
   // const [isLogged, setIsLogged] = useState<boolean>(true);
-  const [user, setUser] = useState<any>(undefined)
+  const [user, setUser] = useState<any>(undefined);
+
+  const { state, dispatch } = useStateUser();
 
   useEffect(() => {
     AuthVerification();
@@ -28,13 +31,14 @@ function App() {
 
   const handleLogin = (logged: boolean, user: any) => {
     setIsLogged(logged);
-    console.log(user);
-    localStorage.setItem('user', JSON.stringify({
-      username: user.username,
-      name: user.name,
-      lastname: user.lastname,
-      tipo_usuario: user.role.name,
-    }));
+
+    if(dispatch){
+      dispatch({
+        type:'set_user',
+        action: user,
+      });
+    }
+    localStorage.setItem('user', JSON.stringify(user));
     
     setUser(user);
 
@@ -51,13 +55,18 @@ function App() {
       }
   
       const auth_service = await api('user/me').get();
-  
+      if(dispatch){
+        dispatch({
+          type:'set_user',
+          action: auth_service,
+        });
+      }
+      console.log("servicio auth:", auth_service);
       const { statusCode, error } = auth_service;
       if(statusCode && statusCode === 401 || statusCode && statusCode === 403 || error){
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setIsLogged(false);
-        window.location.href ="/gpac-app";
   
       }
     }

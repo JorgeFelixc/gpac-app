@@ -6,7 +6,7 @@
 
 .box-login{
     margin:25px 0px;
-    width: 20vw;
+    width: 24vw;
     font-size: 14px;
     color:rgb(202, 198, 198);
 }
@@ -50,4 +50,14 @@
     -webkit-text-fill-color: white;
     -webkit-box-shadow: 0 0 0px 1000px #000 inset;
     transition: background-color 5000s ease-in-out 0s;
+}
+
+.box-error{
+    width: 100%;
+    background-color:rgba(220, 20, 60, 0.7);
+    border-bottom:3px solid crimson;
+    padding:15px 12px;
+    margin:10px 0px;
+    color:white;
+    border-radius: 2px;
 }
