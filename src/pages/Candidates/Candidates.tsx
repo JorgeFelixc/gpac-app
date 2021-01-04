@@ -50,8 +50,8 @@ export default function Candidates(props:any){
             candidate: {
                 ...params,
                 location: JSON.stringify({
-                    lat: Math.random() * 100 - 10,
-                    lon:    Math.random() * 100 - 10,
+                    lat: Math.random() * 130 - 40,
+                    long:    Math.random() * 130 - 40,
                 }),
                 user: {
                     firstName: params.firstName,
@@ -71,7 +71,7 @@ export default function Candidates(props:any){
                 type:'success',
                 text: 'Your data has been saved.',
             })
-            // history.push('/candidates');
+            history.push('/market');
             return;
         }
         setMessageState({

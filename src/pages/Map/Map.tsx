@@ -1,11 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Map.css';
 import * as Mapbox from 'mapbox-gl';
 import {TextField, Button, Checkbox} from '@material-ui/core';
+import { ICandidate } from '../../interfaces/Helpers/ICantidate';
+import { GetData } from '../../utils/util';
+import Loader from '../../components/Loader';
 
 
 export default function Map(props:any){
+    const [candidate, setCandidates] = useState<ICandidate[]>([])
+    const [loader, setLoader] = useState<boolean>(false);
+
+    useEffect(() => {
+        GetData('candidates', setCandidates, setLoader);
+    }, [])
+
     return(
         <div>
             <div className="row box-map-options">
@@ -26,10 +36,17 @@ export default function Map(props:any){
             <div className="row-top">
                 <div className="wrapper-candidate-location">
                     {
-                        testData.map(item => <CandidateBox {...item} />)
+                        loader &&
+                        <div className="wrapper-loader">
+                            <Loader />
+                        </div>
+                    }
+                    {
+                        candidate &&
+                        candidate.map(item => <CandidateBox candidate={item} />)
                     }
                 </div>
-                <MapContainer candidates={testData} />
+                <MapContainer candidates={candidate} />
             </div>
         </div>
     )
@@ -37,7 +54,7 @@ export default function Map(props:any){
 
 
 interface IMapContainer {
-    candidates: ICandidateBox[],
+    candidates: ICandidate[],
 }
 
 function MapContainer({candidates}:IMapContainer){
@@ -48,25 +65,12 @@ function MapContainer({candidates}:IMapContainer){
             style:'mapbox://styles/mapbox/streets-v11',
             accessToken: 'pk.eyJ1Ijoiam9yZ2VmYyIsImEiOiJja2phNTZqcHIwODVjMnJtYTNrMjlsN2VuIn0.iMOOrw5Jc5IaUqe2yW81ow'
         });
-
-
-
-        const markerHeight = 50, markerRadius = 10, linearOffset = 25;
-        // var popupOffsets = {
-        // 'top': [0, 0],
-        // 'top-left': [0,0],
-        // 'top-right': [0,0],
-        // 'bottom': [0, -markerHeight],
-        // 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        // 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        // 'left': [markerRadius, (markerHeight - markerRadius) * -1],
-        // 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-        // };
-
         candidates.map(item => { 
+            // console.log("lat:",  item);
+            const LngLat = JSON.parse(item.location);
             new Mapbox.Popup({ className: 'box-marker', closeOnClick:false, closeButton:false})
-                .setLngLat(item.location)
-                .setHTML(`<p>${item.name}</p>`)
+                .setLngLat([LngLat.lat, LngLat.long])
+                .setHTML(`<p>${item.user.firstName} ${item.user.lastName}</p>`)
                 .setMaxWidth("300px")
                 .addTo(map);    
 
@@ -76,7 +80,7 @@ function MapContainer({candidates}:IMapContainer){
         //     .setHTML("<h1>Hello World!</h1>")
         //     .setMaxWidth("300px")
         //     .addTo(map);    
-    }, [])
+    }, [candidates])
 
     return(
         <div id="map-container">
@@ -87,122 +91,22 @@ function MapContainer({candidates}:IMapContainer){
 
 
 interface ICandidateBox{
-    name:string,
-    industry:string,
-    title:string,
-    location:Mapbox.LngLatLike,
-    phone:string,
-    address1:string,
-    address2:string,    
+    candidate:ICandidate
 }
-function CandidateBox({name, industry, title, location, phone, address1, address2}:ICandidateBox){
+function CandidateBox({candidate}:ICandidateBox){
     return(
         <div className="row-between box-candidate-location">
             <div>
-                <p>{industry}</p>
-                <h3>{name}</h3>
-                <p>{title}</p>
+                <p>{candidate.industry}</p>
+                <h3>{candidate.user.firstName} {candidate.user.lastName}</h3>
+                <p>{candidate.title}</p>
             </div>
             <div>
-                <p>{address1}</p>
-                <p>{address2}</p>
-                <p>{phone}</p>
+                <p>NJ</p>
+                <p>54789</p>
+                <p>{candidate.user.phone}</p>
             </div>
         </div>
     )
 }
 
-
-
-const testData: ICandidateBox[] = [
-    {
-        name: 'Aurora Coding',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [30.5, 50.5],
-    },
-    {
-        name: 'Beijing Studio',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Video Production',
-        industry: 'Company',
-        location: [30.5, 20.5],
-    },
-    {
-        name: 'Marvel Studio',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [90.5, 30.5],
-    },
-    {
-        name: 'Jonathan Doe',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Engineer',
-        industry: 'Talent',
-        location: [1.5, 50.5],
-    },
-    {
-        name: 'Kate Hotsonn',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Baking Analyst',
-        industry: 'Talent',
-        location: [2.5, 90],
-    },
-    {
-        name: 'Sr React Developer',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Aurora Coding',
-        industry: 'Talent',
-        location: [34.5, 3.5],
-    },
-    {
-        name: 'Aurora Coding',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [20.5, 9.5],
-    },
-    {
-        name: 'Aurora Coding',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [30.5, 90],
-    },
-    {
-        name: 'Aurora Coding',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [30.5, -50.5],
-    },
-    {
-        name: 'Aurora Coding',
-        address1: 'Kearny Ny',
-        address2: '54789',
-        phone: '(123) 456 78 90',
-        title: 'Development',
-        industry: 'Company',
-        location: [-30.5, 50.5],
-    },
-]

@@ -43,8 +43,8 @@ export default function Nav(props:INav){
                 <MoreVertIcon className="icon-menu"/>
                 <div className="wrapper-dropdown-menu columns">
                     <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/anime_spirited_away_no_face_nobody-512.png"  />
-                    <h3>{state.user?.firstName} {state.user?.lastName} ({state.user?.role.description})</h3>
-                    <p className="text-email">{state.user?.email}</p>
+                    <h3>{state.user && state.user?.firstName} {state.user && state.user?.lastName} ({state.user && state.user?.role.description})</h3>
+                    <p className="text-email">{state.user && state.user?.email}</p>
                     <div className="top-auto">
                         <Button variant="contained" className="btn-border" onClick={props.handleLogout}>Logout</Button>
                     </div>

@@ -20,6 +20,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { ColumnsType } from '../../interfaces/Utils/ColumnsType';
 import { IUsuario } from '../../interfaces/Helpers/IUsuario';
 import { ICandidate } from '../../interfaces/Helpers/ICantidate';
+import WarningIcon from '@material-ui/icons/Warning';
 
 export default function Market(_props:any){
     const [users, setUsers] = useState([]);
@@ -29,7 +30,7 @@ export default function Market(_props:any){
 
     // fetch data
     useEffect(() => {
-        GetData('users', setUsers, setLoader);
+        // GetData('users', setUsers, setLoader);
         GetData('candidates', setCandidates);
     }, []);
 
@@ -45,7 +46,7 @@ export default function Market(_props:any){
             key:'name',
             title:'Name',
             render: (record:ICandidate) => (
-                <TableCell className="columns-center row-name"> 
+                <TableCell className="columns-center row-name name-padding"> 
                     <p><strong>{record.user.firstName} {record.user.lastName}</strong></p> 
                     <p>{record.title}</p>
                 </TableCell>
@@ -90,6 +91,15 @@ export default function Market(_props:any){
                     <p>NJ</p>
                 </TableCell>
             )
+        },
+        {
+            key:'actions',
+            title:'Actions',
+            render: (record:ICandidate) => (
+                <TableCell  className="columns-center row-action">
+                    <Button variant="contained" className="btn-border" onClick={() => history.push(`/candidates/${record.id}`) }>View Profile</Button>
+                </TableCell>
+            )
         }
     ]
 
@@ -105,16 +115,10 @@ export default function Market(_props:any){
             <div className="row">
                 <h1 className="icon-red">Market</h1>
                 <div className="wrapper-content-options left-auto">
-                    <Button variant="contained" onClick={() => history.push('/candidates/new')}>Add new talent</Button>
+                    <Button variant="contained" onClick={() => history.push('/candidates/new')}>Add new talent </Button>
                 </div>
             </div>
 
-            {
-                users.length === 0 && 
-                <div className="columns-center">
-                    <h1>No hay datos</h1>
-                </div>
-            }
     
             <CustomTable dataSource={candidates} columns={columns} />
 
@@ -132,7 +136,7 @@ function CustomTable({columns, dataSource}:ICustomTable){
 
     const buildHeaders = () => {
         return columns.map((item, index) => {
-            if(item.noTitle){ return }
+            if(item.noTitle){ return  }
 
             return <TableCell key={index}>{item.title}</TableCell>
         });
@@ -170,6 +174,14 @@ function CustomTable({columns, dataSource}:ICustomTable){
         })
     }
 
+    if(dataSource.length === 0){
+        return (
+            <div className="wrapper-notfound columns-center">
+                <WarningIcon className="icon-notfound"/>
+                <p className="text-notfound">No hay datos</p>
+            </div>
+        )
+    }
     return(
         <>
         <TableContainer>

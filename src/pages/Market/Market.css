@@ -28,9 +28,21 @@ table{
 .header-table > th,
 .body-table > td{
     flex:1;
+    /* width:240px; */
     padding:20px 0px;
-    padding-left: 80px;
 }
+.body-table,
+.header-table{
+    padding:0px 10px;
+}
+.header-table > th:first-child,
+.name-padding{
+    padding-left: 70px !important;
+}
+.tablecell-nodisplayed{
+    position: absolute;
+}
+
 .body-table{
     background-color:#34343C;
     /* padding:5px 0px; */
@@ -59,10 +71,10 @@ table{
     width: 70px;
     object-fit: cover;
 }
-.row-action{
+/* .row-action{
     padding-left: 10px !important;
     padding-right: 70px !important;
-}
+} */
 .row-name strong{
     text-align: center;
 }
@@ -77,4 +89,20 @@ table{
 .MuiTablePagination-root,
 .MuiSelect-icon{
     color:white !important;
+}
+
+.wrapper-notfound{
+    width:100%;
+    
+}
+
+.text-notfound{
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.icon-notfound{
+    height: 70px !important;
+    width: 70px !important;
+    font-size: 35px;
 }
