@@ -58,15 +58,19 @@ interface IMapContainer {
 }
 
 function MapContainer({candidates}:IMapContainer){
-
+    let map: Mapbox.Map;
     useEffect(() => {
-        const map = new Mapbox.Map({
-            container: 'map-container',
-            style:'mapbox://styles/mapbox/streets-v11',
-            accessToken: 'pk.eyJ1Ijoiam9yZ2VmYyIsImEiOiJja2phNTZqcHIwODVjMnJtYTNrMjlsN2VuIn0.iMOOrw5Jc5IaUqe2yW81ow'
-        });
+
+        if(!map){
+            map = new Mapbox.Map({
+                container: 'map-container',
+                style:'mapbox://styles/mapbox/streets-v11',
+                accessToken: 'pk.eyJ1Ijoiam9yZ2VmYyIsImEiOiJja2phNTZqcHIwODVjMnJtYTNrMjlsN2VuIn0.iMOOrw5Jc5IaUqe2yW81ow'
+            });
+        }
+
+        map.resize();
         candidates.map(item => { 
-            // console.log("lat:",  item);
             const LngLat = JSON.parse(item.location);
             new Mapbox.Popup({ className: 'box-marker', closeOnClick:false, closeButton:false})
                 .setLngLat([LngLat.lat, LngLat.long])
@@ -75,11 +79,7 @@ function MapContainer({candidates}:IMapContainer){
                 .addTo(map);    
 
         });
-        // var popup = new Mapbox.Popup({ className: 'box-marker', closeOnClick:false, closeButton:false})
-        //     .setLngLat([40.5, 50.5])
-        //     .setHTML("<h1>Hello World!</h1>")
-        //     .setMaxWidth("300px")
-        //     .addTo(map);    
+
     }, [candidates])
 
     return(
