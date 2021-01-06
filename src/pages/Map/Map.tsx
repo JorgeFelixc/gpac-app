@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import './Map.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import * as Mapbox from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import {TextField, Button, Checkbox} from '@material-ui/core';
 import { ICandidate } from '../../interfaces/Helpers/ICantidate';
 import { GetData } from '../../utils/util';
