@@ -21,13 +21,14 @@ import { ColumnsType } from '../../interfaces/Utils/ColumnsType';
 import { IUsuario } from '../../interfaces/Helpers/IUsuario';
 import { ICandidate } from '../../interfaces/Helpers/ICantidate';
 import WarningIcon from '@material-ui/icons/Warning';
+import { useStateUser } from '../../components/Hooks/useGlobalHook';
 
 export default function Market(_props:any){
     const [users, setUsers] = useState([]);
     const [loader, setLoader] = useState(false);
     const [candidates, setCandidates] = useState([]);
     const history = useHistory();
-
+    const { state, dispatch } = useStateUser(); 
     // fetch data
     useEffect(() => {
         // GetData('users', setUsers, setLoader);
@@ -115,7 +116,14 @@ export default function Market(_props:any){
             <div className="row">
                 <h1 className="icon-red">Market</h1>
                 <div className="wrapper-content-options left-auto">
-                    <Button variant="contained" onClick={() => history.push('/candidates/new')}>Add new talent </Button>
+                    {
+                        state.user &&
+                        state.user.role.id === 1 ? 
+                        <Button variant="contained" onClick={() => history.push('/candidates/new')}>Add new talent </Button>
+                        :
+                        ''
+
+                    }
                 </div>
             </div>
 
@@ -213,7 +221,7 @@ function CustomTable({columns, dataSource}:ICustomTable){
     )
 }
 
-
+// Tabla vieja
 function MarketTable(props:any){
     const history = useHistory();
     const ignoredHeaders = [ 
