@@ -32,7 +32,11 @@ export default function Home({ isLogged, handleLogout }: HomeProps) {
   }, [])
 
 
-
+  if(!state.user){
+    return <div className="wrapper-loader">
+      <Loader/>
+    </div>
+  }
   // if (!user) {
   //   return (<div className="wrapper-loader columns-center"><Loader/></div>)
   // }

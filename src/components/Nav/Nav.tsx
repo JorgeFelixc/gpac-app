@@ -14,6 +14,11 @@ interface INav {
 
 export default function Nav(props:INav){
     const { state, dispatch } = useStateUser();
+
+    if(!state.user){
+        props.handleLogout();
+    }
+
     return(
         <nav>
             <div className="row box-filters">

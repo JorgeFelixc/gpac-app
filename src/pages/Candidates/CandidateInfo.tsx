@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     TextField, 
     Button, 
@@ -9,8 +9,41 @@ import {
 import { ReactComponent as DropdownIcon } from '../../assets/img/dropdown.svg'
 
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import { ICandidate } from '../../interfaces/Helpers/ICantidate';
 
-export default function CandidateInfo(props:any){
+interface PropsCandidateInfo{
+    candidate: ICandidate | undefined,
+}
+
+export default function CandidateInfo({candidate}:PropsCandidateInfo){
+
+    useEffect(() => {
+        if(candidate){
+            const data = {
+                ...candidate,
+                ...candidate.user,
+            }
+            fillForm('candidate', data);
+        }    
+    }, [candidate])
+
+
+    const fillForm = (name:string, objectValue: any) => {
+        const formsChild = document.getElementsByName(name);
+        formsChild.forEach((item:any) => { 
+            if(!item.id){
+                return;
+            }
+            // solving typescript troubles hehe
+            const propertieValue = objectValue[item.id];
+            console.log("algo:", item.id, propertieValue);
+            if(propertieValue){
+                item.value = propertieValue;
+                item.nodeValue = propertieValue;
+                item.textContent = propertieValue;
+            }
+        });
+    }
 
     return(
         <div className="wrapper-candidate-info">
@@ -54,7 +87,7 @@ export default function CandidateInfo(props:any){
                 </div>
                 <div>
                     <p>Location</p>
-                    <TextField  inputProps={{required:true}} name="candidate" id="location" variant="outlined" placeholder="Location" />
+                    <TextField  inputProps={{required:true}} disabled={candidate ? true : false } name="candidate" id="location" variant="outlined" placeholder="Location" />
                 </div>
                 <div>
                     <p>Phone</p>

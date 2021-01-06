@@ -16,6 +16,7 @@ export async function GetData(uri:string, callback:React.Dispatch<any> ,setLoade
 
         const {statusCode, error} = data;
         if(error){
+            console.log("statusCode", statusCode);
             // if(error === "youre not logged"){
             //     window.location.href ="/";
             // }
