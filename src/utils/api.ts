@@ -75,5 +75,6 @@ const api = (uri: string) => (endpoint: string) => {
 }
 // export default api('http://localhost:1337/');
 // export default api('http://localhost:5000/api/');
-export default api('http://35.238.225.98/api/');
+// export default api('http://35.238.225.98/api/');
+export default api('http://34.71.94.84/api/');
 // export default api('https://askjxguaknff8kf.imcaiap.org.mx/');
